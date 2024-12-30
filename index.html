@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bhuyashi Deka</title>
-    <link rel="icon" type="image/jpg" href="images/BD_favicon_final.jpg" >
+    <link rel="icon" type="image/jpg" href="images/BD.PNG" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         html {
@@ -201,16 +201,30 @@
             margin-bottom: 40px;
             gap: 15px;
             width: 100%;
+            position: relative;
         }
 
         #projects .project img {
             width: 220px;
             height: 165px;
+            object-fit: cover; /* Ensures aspect ratio is maintained */
+            display: block; /* Centers the image horizontally */
+            margin: auto; /* Centers the image inside the container */
         }
 
         #projects .project .description {
             padding-left: 30px;
-            width: 100%;
+            width: calc(100% - 250px);
+        }
+
+        #projects .project .image-container {
+            width: 220px;
+            height: 165px;
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Ensures the image is centered inside this container */
+            background-color: #f5f5f5; /* Optional: A neutral background color for empty spaces */
+            overflow: hidden; /* Ensures no part of the image overflows the container */
         }
 
         #projects .project .description h3 {
@@ -291,10 +305,13 @@
 <section id="projects">
     <h2 id="projects-heading" class="fade-up">Projects</h2>
     <div class="project fade-up delay-1">
-        <img src="images/flowchart_sample.jpg" alt="Project Image">
+        <!-- <img src="images/pathfinder.png" alt="Project Image"> -->
+        <div class="image-container">
+            <img src="images/pathfinder.png" alt="Project Image">
+        </div>
         <div class="description">
             <h3><a href="https://github.com/Bhuyashi/pathfinder" target="_blank">Pathfinder</a></h3>
-            <p>A pathfinding algorithm visualization tool, showcasing various algorithms in action.</p>
+            <p>The project provides an interactive visualization tool that demonstrates pathfinding algorithms like A*, DFS, BFS and visually compare algorithm efficiency.</p>
         </div>
     </div>
     <div class="project fade-up delay-2">
