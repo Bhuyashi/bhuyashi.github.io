@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhuyashi Deka</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px;
+        }
+        body {
+            font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 17px;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white;
+            border-bottom: 1px solid lightgrey;
+            padding: 25px 0 5px 0;
+            z-index: 1000;
+            height: 45px;
+        }
+
+        .nav-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            position: relative;
+        }
+
+        nav .title {
+            font-size: 19px;
+            font-weight: bold;
+            color: grey;
+            margin-bottom: 5px;
+            margin-left: 20px;
+        }
+
+        nav .links {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            width: 900px;
+        }
+
+        nav .links a {
+            color: grey;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: inline-block;
+            font-size: 17px;
+        }
+
+        nav .links a:hover {
+            background-color: #f2f2f2;
+            border-radius: 4px;
+        }
+
+        section {
+            padding: 80px 0;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+        
+        section#projects {
+            padding-top: 50vh;  /* Keep the visual spacing */
+            scroll-margin-top: 50vh; /* Adjust scroll position to match padding */
+        }
+
+        #about {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            padding-top: 180px; /* Increased from 120px */
+            scroll-margin-top: 70px;
+        }
+
+        #projects h2 {
+            scroll-margin-top: 70px; /* Account for navbar height */
+            margin-top: 0;
+            color: #333;
+            font-size: 29px;
+            margin-bottom: 30px;
+        }
+
+        #about .info h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 29px;
+        }
+
+        #about .profile-section {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #about .profile-name {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-size: 22px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        #about .profile-subtitle {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        #about img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #about .info {
+            max-width: 80%;
+            color: #555;
+        }
+
+        #about .links {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 15px;
+            margin-top: 15px;
+            margin-left: 0;
+            position: static;
+            transform: none;
+            width: auto;
+        }
+
+        #about a {
+            color: #00b3b3;
+            text-decoration: none;
+        }
+
+        #about a:hover {
+            text-decoration: underline;
+        }
+
+        #projects {
+            text-align: left;
+            padding-left: 0px;
+        }
+
+        #projects .project {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin-bottom: 40px;
+            gap: 15px;
+            width: 100%;
+        }
+
+        #projects .project img {
+            width: 220px;
+            height: 165px;
+        }
+
+        #projects .project .description {
+            padding-left: 30px;
+            width: 100%;
+        }
+
+        #projects .project .description h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 25px;
+            color: #333;
+        }
+
+        #projects .project .description h3 a {
+            color: #333;
+            text-decoration: none;
+            font-size: 25px;
+        }
+
+        #projects .project .description h3 a:hover {
+            color: #0073e6;
+            text-decoration: none;
+        }
+
+        #projects .project .description p {
+            margin: 10px 0;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .icon {
+            display: inline-block;
+            vertical-align: middle;
+            box-sizing: border-box;
+            transition: transform 0.2s;
+        }
+
+        .icon:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <div class="title">Homepage</div>
+        <div class="links">
+            <a href="#about">About Me</a>
+            <a href="resume/Embedded_Resume.pdf" target="_blank">CV</a>
+            <a href="#projects-heading">Projects</a>
+        </div>
+    </div>
+</nav>
+
+<section id="about">
+    <div class="fade-up profile-section">
+        <img src="images/profile_pic_2.jpeg" alt="Profile Picture">
+        <div class="profile-name">Bhuyashi Deka</div>
+        <div class="profile-subtitle">Computer Science Graduate Student</div>
+        <div class="links fade-up delay-1" style="display: flex; justify-content: center; gap: 20px;">
+            <a href="https://github.com/Bhuyashi" target="_blank">
+                <i class="fab fa-github fa-2x" style="color: #333; font-size: 22px;"></i>
+            </a>
+            <a href="mailto:bdeka@wisc.edu">
+                <i class="fas fa-envelope fa-2x" style="color: #333; font-size: 22px;"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/bhuyashi-deka" target="_blank">
+                <i class="fab fa-linkedin fa-2x" style="color: #0077B5; font-size: 22px;"></i>
+            </a>
+        </div>
+    </div>
+    <div class="info fade-up delay-2">
+        <h2>Hey,</h2>
+        <p>I am a first-year Master's student in Computer Science at the University of Wisconsin-Madison. My research interests broadly lie in Computer Vision and Machine Learning.</p>
+        <p>Prior to this, I worked in the Multimedia and Algorithms team at Samsung Semiconductor India Research, where I contributed to the image post-processing pipeline in Exynos SoCs, specifically for the Dense Optical Flow engine and the Spatio-Temporal Noise Reduction engine.</p>
+        <p>Before that, I completed my Dual Degree (B.Tech and M.Tech) in Electrical Engineering from IIT Bombay. For my masters thesis, I was supervised by <a href="https://www.ee.iitb.ac.in/~viren/" target="_blank">Prof. Virendra Singh</a> where I worked on building efficient hardware accelerator for convolutional neural network.</p>
+        <p>In my free time, I enjoy <a href="https://www.goodreads.com/user/show/116808802-bhuyashi" target="_blank">reading</a> and painting. Please feel free to <a href="mailto:bdeka@wisc.edu">email</a> me with questions or feedback regarding any of my projects.</p>
+    </div>
+</section>
+
+<section id="projects">
+    <h2 id="projects-heading" class="fade-up">Projects</h2>
+    <div class="project fade-up delay-1">
+        <img src="images/flowchart_sample.jpg" alt="Project Image">
+        <div class="description">
+            <h3><a href="https://github.com/Bhuyashi/pathfinder" target="_blank">Pathfinder</a></h3>
+            <p>A pathfinding algorithm visualization tool, showcasing various algorithms in action.</p>
+        </div>
+    </div>
+    <div class="project fade-up delay-2">
+        <img src="images/flowchart_sample.jpg" alt="Project Image">
+        <div class="description">
+            <h3><a href="https://github.com/Bhuyashi/3d-flappy-bird" target="_blank">3D Flappy Bird</a></h3>
+            <p>A 3D perspective game developed in JavaScript with fun gameplay mechanics.</p>
+        </div>
+    </div>
+    <div class="project fade-up delay-2">
+        <img src="images/flowchart_sample.jpg" alt="Project Image">
+        <div class="description">
+            <h3><a href="https://github.com/Bhuyashi/3d-flappy-bird" target="_blank">3D Flappy Bird</a></h3>
+            <p>A 3D perspective game developed in JavaScript with fun gameplay mechanics.</p>
+        </div>
+    </div>
+    <div class="project fade-up delay-2">
+        <img src="images/flowchart_sample.jpg" alt="Project Image">
+        <div class="description">
+            <h3><a href="https://github.com/Bhuyashi/3d-flappy-bird" target="_blank">3D Flappy Bird</a></h3>
+            <p>A 3D perspective game developed in JavaScript with fun gameplay mechanics.</p>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Intersection Observer setup
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Stop observing once animation is triggered
+            }
+        });
+    }, observerOptions);
+
+    // Get all elements with fade-up class
+    const fadeElements = document.querySelectorAll('.fade-up');
+
+    // Start observing each element
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+</script>
+
+</body>
+</html>
