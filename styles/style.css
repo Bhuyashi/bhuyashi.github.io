@@ -1,0 +1,298 @@
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px;
+}
+body {
+    font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-1 {
+    transition-delay: 0.1s;
+}
+
+.delay-2 {
+    transition-delay: 0.2s;
+}
+
+.delay-3 {
+    transition-delay: 0.3s;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    border-bottom: 1px solid lightgrey;
+    padding: 25px 0 5px 0;
+    z-index: 1000;
+    height: 45px;
+}
+
+.nav-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+}
+
+nav .title {
+    font-size: 19px;
+    font-weight: bold;
+    color: grey;
+    margin-bottom: 5px;
+    margin-left: 20px;
+}
+
+nav .links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    width: 900px;
+}
+
+nav .links a {
+    color: grey;
+    text-decoration: none;
+    padding: 8px 12px;
+    display: inline-block;
+    font-size: 17px;
+}
+
+nav .links a:hover {
+    background-color: #f2f2f2;
+    border-radius: 3px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+    transform: scale(1.1);
+}
+
+section {
+    padding: 80px 0;
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+section#projects {
+    padding-top: 50vh;  /* Keep the visual spacing */
+    scroll-margin-top: 50vh; /* Adjust scroll position to match padding */
+}
+
+#about {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    padding-top: 180px; /* Increased from 120px */
+    scroll-margin-top: 70px;
+}
+
+#projects h2 {
+    scroll-margin-top: 70px; /* Account for navbar height */
+    margin-top: 0;
+    color: #555;
+    font-size: 27px;
+    margin-bottom: 30px;
+}
+
+#about .info h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+
+#about .profile-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#about .profile-name {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 22px;
+    color: #333;
+    font-weight: bold;
+}
+
+#about .profile-subtitle {
+    color: #666;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+#about img {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    position: relative;
+}
+
+#about .info {
+    max-width: 80%;
+    color: #555;
+}
+
+#about .links {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+    margin-top: 15px;
+    margin-left: 0;
+    position: static;
+    transform: none;
+    width: auto;
+}
+
+#about a {
+    color: #00b3b3;
+    text-decoration: none;
+}
+
+#about a:hover {
+    text-decoration: underline;
+}
+
+#projects {
+    text-align: left;
+    padding-left: 0px;
+}
+
+#projects .project {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 40px;
+    gap: 15px;
+    width: 100%;
+    position: relative;
+}
+
+#projects .project img {
+    width: 220px;
+    height: 165px;
+    object-fit: cover; /* Ensures aspect ratio is maintained */
+    display: block; /* Centers the image horizontally */
+    margin: auto; /* Centers the image inside the container */
+}
+
+#projects .project .description {
+    padding-left: 30px;
+    width: calc(100% - 250px);
+}
+
+#projects .project .image-container {
+    width: 220px;
+    height: 165px;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Ensures the image is centered inside this container */
+    background-color: #f5f5f5; /* Optional: A neutral background color for empty spaces */
+    overflow: hidden; /* Ensures no part of the image overflows the container */
+}
+
+#projects .project .description h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 23px;
+    color: #555;
+}
+
+#projects .project .description h3 a {
+    color: #555;
+    text-decoration: none;
+    font-size: 23px;
+}
+
+#projects .project .description h3 a:hover {
+    color: #00b3b3;
+    text-decoration: underline;
+}
+
+#projects .project .description p {
+    margin: 10px 0;
+    color: #555;
+    line-height: 1.5;
+}
+
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    transition: transform 0.2s;
+}
+
+.icon:hover {
+    transform: scale(1.1);
+}
+
+@media screen and (max-width: 768px) {
+nav .links {
+    flex-direction: column;
+    width: 100%;
+    left: 0;
+    transform: none;
+    text-align: center;
+    padding: 10px;
+}
+
+#about {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    gap: 20px;
+}
+
+#about .info {
+    max-width: 90%;
+    text-align: center;
+}
+
+#projects .project {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#projects .project .description {
+    width: 100%;
+    padding-left: 0;
+    margin-top: 15px;
+}
+
+#projects .project img,
+#projects .project .image-container {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}
+}

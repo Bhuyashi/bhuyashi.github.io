@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deliciously Rendered: A Blender Donut Project</title>
+    <link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Bhuyashi" />
+    <link rel="manifest" href="../favicon/site.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/project_style.css" />
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <div class="title">Homepage</div>
+    </div>
+</nav>
+
+<section id="project-title" class="fade-up">
+    <div>
+        <h1>Deliciously Rendered: A Blender Donut Project</h1>
+        <img src="../images/Donuts.png" alt="Blender Donuts" style="width: 100%; max-width: 800px; height: auto;">
+    </div>
+</section>
+
+<section id="project-content" class="fade-up">
+    <div>
+        <p>This project showcases a 3D-rendered donut created in Blender, focusing on realism and aesthetic appeal. The goal was to practice procedural modeling, texturing, and lighting techniques while achieving a visually appetizing result.</p>
+        <p>Key aspects of the project include:</p>
+        <ul>
+            <li><b>Modeling:</b> The donut was sculpted using Blender’s subdivision and sculpting tools to achieve a soft, doughy appearance.</li>
+            <li><b>Texturing & Shading:</b> Procedural textures were used for the dough and icing, with subsurface scattering to enhance realism. Sprinkles were generated using particle systems for a natural distribution.</li>
+            <li><b>Lighting & Rendering:</b> A three-point lighting setup was used to highlight textures and shadows effectively. The final render was done using Cycles for high-quality photorealistic output.</li>
+            <li><b>Post-processing:</b> Minor adjustments were made in Blender’s compositor to refine colors and contrast.</li>
+        </ul>
+        <p>The video below showcases the final donut setup</p>
+        <video controls width="100%">
+            <source src="../videos/Blender_recording.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <p>This project was an exercise in Blender fundamentals and an exploration of how small details—such as glaze thickness, surface imperfections, and realistic shadows—contribute to a compelling 3D render.</p>
+    </div>
+</section>
+
+<section id="github" class="fade-up">
+    <div>
+        <p><a href="https://github.com/Bhuyashi/donut_blender" target="_blank"><b>Github</b></a></p>
+    </div>
+</section>
+
+<script>
+    // Intersection Observer setup
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Stop observing once animation is triggered
+            }
+        });
+    }, observerOptions);
+
+    // Get all elements with fade-up class
+    const fadeElements = document.querySelectorAll('.fade-up');
+
+    // Start observing each element
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+</script>
+
+</body>
+</html>
