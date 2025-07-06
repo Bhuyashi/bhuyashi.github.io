@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deliciously Rendered: A Blender Donut Project</title>
+    <title>Creating a Realistic Donut in Blender</title>
     <link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
     <link rel="shortcut icon" href="../favicon/favicon.ico" />
@@ -17,39 +17,73 @@
 
 <nav>
     <div class="nav-container">
-        <div class="title">Homepage</div>
+        <a href="../index.html" class="title">Homepage</a>
     </div>
 </nav>
 
-<section id="project-title" class="fade-up">
-    <div>
-        <h1>Deliciously Rendered: A Blender Donut Project</h1>
-        <img src="../images/Donuts.png" alt="Blender Donuts" style="width: 100%; max-width: 800px; height: auto;">
-    </div>
-</section>
+    <section id="project-title" class="fade-up">
+        <div>
+            <h1>Creating a Realistic Donut in Blender</h1>
+            <p style="font-size: 0.7em; color: #888; margin-top: 0; margin-bottom: 1em;">March 2025</p>
+            <!-- <p style="font-size: 1.2em; color: #666; margin-top: 0;">A deep dive into 3D modeling, texturing, and the art of making digital food look delicious</p> -->
+            <img src="../images/Donuts.png" alt="Blender Donuts" style="width: 100%; max-width: 800px; height: auto; margin-top: 1em;">
+        </div>
+    </section>
 
-<section id="project-content" class="fade-up">
-    <div>
-        <p>This project showcases a 3D-rendered donut created in Blender, focusing on realism and aesthetic appeal. The goal was to practice procedural modeling, texturing, and lighting techniques while achieving a visually appetizing result.</p>
-        <p>Key aspects of the project include:</p>
-        <ul>
-            <li><b>Modeling:</b> The donut was sculpted using Blender’s subdivision and sculpting tools to achieve a soft, doughy appearance.</li>
-            <li><b>Texturing & Shading:</b> Procedural textures were used for the dough and icing, with subsurface scattering to enhance realism. Sprinkles were generated using particle systems for a natural distribution.</li>
-            <li><b>Lighting & Rendering:</b> A three-point lighting setup was used to highlight textures and shadows effectively. The final render was done using Cycles for high-quality photorealistic output.</li>
-            <li><b>Post-processing:</b> Minor adjustments were made in Blender’s compositor to refine colors and contrast.</li>
-        </ul>
-        <p>The video below showcases the final donut setup</p>
-        <video controls width="100%">
-            <source src="../videos/Blender_recording.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <p>This project was an exercise in Blender fundamentals and an exploration of how small details—such as glaze thickness, surface imperfections, and realistic shadows—contribute to a compelling 3D render.</p>
-    </div>
-</section>
+<div class="main-content">
+    <section id="project-content" class="fade-up">
+        <div>
+            <h2>The Beginning: Why a Donut?</h2>
+            <p>I started this project since I needed to create custom 3D assets for my Virtual Reality escape room game. I started with Blender since it has easy integration with Unity, is lightweight, and most importantly coz it's free.</p>
+            <p>But Blender can be overwhelming, with the sheer number of tools and options available. Enter the classic Blender donut tutorial.</p>
+
+            <h2>The Modeling Process: From Torus to Tasty</h2>
+            <p>The foundation was straightforward. Blender's torus primitive provided the perfect starting point. But early on you discover that perfect is not realistic.</p>
+            
+            <p>So, I began by adding subdivision surface modifiers to smooth out the geometry, used sculpting tools to create subtle variations in the surface, and added small indentations and surface imperfections. The key was making the dough look soft and slightly irregular, just like a real donut would be.</p>
+
+            <h2>Texturing: Where the Magic Happens</h2>
+            <p>This is where the project really came to life. I created procedural textures for both the dough and icing, using Blender's node-based material system. For the dough, I layered multiple noise textures to simulate the porous, slightly rough surface of baked goods. I also added a subtle gradient to the dough to give it a more realistic appearance.</p>
+            
+            <p>The icing was a different challenge entirely. I needed it to look glossy and slightly translucent, with just the right amount of thickness. I used subsurface scattering to give it that realistic depth, making it look like light was actually penetrating the surface rather than just reflecting off it.</p>
+
+            <h2>The Sprinkles Challenge</h2>
+            <p>To add the sprinkles, I used the particle system to distribute them naturally across the icing surface. The trick was getting the right density—too many and it looked artificial, too few and it lacked visual interest. I also varied the colors and sizes slightly to mimic real sprinkles.</p>
+
+            <h2>Lighting: Setting the Mood</h2>
+            <p>For the final presentation, lighting was key. I added a red and blue light on the sides of the donuts such that they complimented the colors of the donuts and highlighted the sprinkles.</p>
+
+            <h2>Rendering and Post-Processing</h2>
+            <p>I used Cycles renderer for photorealistic results, though it required longer render times. The payoff was worth it. The subsurface scattering, realistic shadows, and accurate light behavior made the final image look incredibly convincing.</p>
+            
+            <p>In post-processing, I made subtle adjustments to color balance and contrast, ensuring the donut looked warm and inviting without being oversaturated.</p>
+
+            <h2>What I Learned</h2>
+            <p>This project taught me that 3D modeling is as much about observation as it is about technical skill. It makes a difference to study how light interacts with the glaze, how the surface imperfections catch the light, and how the colors vary slightly across the surface.</p>
+            
+            <p>And that the devil is in the details. A slight adjustment to the subsurface scattering settings could make the difference between plastic-looking icing and something that actually appeared edible.</p>
+
+            <h2>The Final Result</h2>
+            <p>Below is a video showcasing the final donut setup, demonstrating the various angles and lighting conditions:</p>
+            
+            <video controls width="100%" style="margin: 2em 0;">
+                <source src="../videos/Blender_recording.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <h2>Looking Forward</h2>
+            <p>What started out as a project to learn Blender, developed into having an eye for detail and understanding how to translate real-world observations into digital art.</p>
+            
+            <p>The donut tutorial is often joked about in the 3D community, but there's a reason it's so popular. It covers all the fundamental concepts: modeling, texturing, lighting, and rendering. More importantly, it teaches you to see the world in terms of geometry, materials, and light.</p>
+
+            <p>As I move forward with my VR project, I look forward to creating fun and complex puzzles that look realistic and immersive.</p>
+        </div>
+    </section>
+</div>
 
 <section id="github" class="fade-up">
     <div>
-        <p><a href="https://github.com/Bhuyashi/donut_blender" target="_blank"><b>Github</b></a></p>
+        <p><a href="https://github.com/Bhuyashi/donut_blender" target="_blank"><b>View the project on GitHub →</b></a></p>
     </div>
 </section>
 
