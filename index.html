@@ -55,6 +55,28 @@
     </div>
 </section>
 
+<section id="rl-animation" class="fade-up">
+    <div class="animation-container">
+        <div class="snake-game-container">
+            <canvas id="snakeCanvas" width="1200" height="300"></canvas>
+            <div class="game-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Episodes</span>
+                    <span class="stat-value" id="episodes">1</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Learning Rate</span>
+                    <span class="stat-value" id="learning-rate">0.1</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section id="projects">
     <h2 id="projects-heading" class="fade-up">Projects</h2>
     <div class="project fade-up delay-1">
@@ -153,6 +175,7 @@
         observer.observe(element);
     });
 </script>
+<script src="projects/snake_rl.js"></script>
 
 </body>
 </html>
