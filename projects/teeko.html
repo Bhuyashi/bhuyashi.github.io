@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Teeko Game Player</title>
+    <link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="../favicon/site.webmanifest" />
+    <link rel="stylesheet" href="../styles/project_style.css" />
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <a href="../index.html" class="title">Homepage</a>
+    </div>
+</nav>
+
+<section id="project-title" class="fade-up">
+    <div>
+        <h1>AI Teeko Game Player</h1>
+        <p style="font-size: 0.7em; color: #888; margin-top: 0; margin-bottom: 0.1em;">March 2025</p>
+        <img src="../images/teeko.png" alt="Teeko Game Board" style="width: 100%; max-width: 800px; height: auto; margin-top: 0.05em; margin-bottom: 0; padding-bottom: 0;">
+    </div>
+</section>
+
+<div class="main-content">
+    <section id="project-content" class="fade-up">
+        <div>
+            <h2 style="margin-top:0; margin-bottom:0;">Project Overview</h2>
+            <p style="margin-top:0; padding-top:0;">Developed an intelligent AI game player for <strong>Teeko</strong>, a strategy game played on a 5x5 board. The project involved implementing the minimax algorithm with depth-limited search, heuristic evaluation, and custom scoring functions to simulate strategic gameplay.</p>
+
+            <h2>About Teeko</h2>
+            <p>Teeko is a two-player abstract strategy game invented by John Scarne. The objective is to arrange four of your pieces in a row, column, diagonal, or in a square on a 5x5 board. The game has two phases: the drop phase (placing pieces) and the move phase (moving pieces to adjacent spaces).</p>
+
+            <h2>AI Implementation</h2>
+            <ul>
+                <li><strong>Minimax Algorithm:</strong> The AI uses a depth-limited minimax search to evaluate possible moves and select the optimal strategy.</li>
+                <li><strong>Heuristic Evaluation:</strong> Custom scoring functions estimate the value of board states, considering potential wins, blocks, and strategic positions.</li>
+                <li><strong>Game Logic:</strong> Handles both the drop and move phases, checks for win conditions, and simulates intelligent gameplay.</li>
+            </ul>
+
+            <h2>How to Use</h2>
+            <ol>
+                <li>Clone the <a href="https://github.com/Bhuyashi/ai_teeko" target="_blank">GitHub repository</a>.</li>
+                <li>Ensure you have Python installed.</li>
+                <li>Run <code>game.py</code> to play against the AI or test the AI's performance.</li>
+            </ol>
+            <p>For more details, see the <a href="https://github.com/Bhuyashi/ai_teeko" target="_blank">project README</a>.</p>
+
+            <h2>Credits & References</h2>
+            <ul>
+                <li><a href="https://github.com/Bhuyashi/ai_teeko" target="_blank">Project GitHub Repository</a></li>
+                <li>Game rules and inspiration: <a href="https://en.wikipedia.org/wiki/Teeko" target="_blank">Teeko on Wikipedia</a></li>
+            </ul>
+        </div>
+    </section>
+</div>
+
+<section id="github" class="fade-up">
+    <div>
+        <p><a href="https://github.com/Bhuyashi/ai_teeko" target="_blank"><b>View the project on GitHub →</b></a></p>
+    </div>
+</section>
+
+<script>
+    // Intersection Observer setup
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Stop observing once animation is triggered
+            }
+        });
+    }, observerOptions);
+
+    // Get all elements with fade-up class
+    const fadeElements = document.querySelectorAll('.fade-up');
+
+    // Start observing each element
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+</script>
+
+</body>
+</html> 
