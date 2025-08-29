@@ -6,12 +6,16 @@ class SnakeRL {
         this.cols = Math.floor(this.canvas.width / this.gridSize);
         this.rows = Math.floor(this.canvas.height / this.gridSize);
         
+        // Calculate middle position of the grid
+        const middleX = Math.floor(this.cols / 2);
+        const middleY = Math.floor(this.rows / 2);
+        
         this.snake = [
-            {x: 5, y: 5},
-            {x: 4, y: 5},
-            {x: 3, y: 5},
-            {x: 2, y: 5},
-            {x: 1, y: 5}
+            {x: middleX, y: middleY},
+            {x: middleX - 1, y: middleY},
+            {x: middleX - 2, y: middleY},
+            {x: middleX - 3, y: middleY},
+            {x: middleX - 4, y: middleY}
         ];
         this.food = this.generateFood();
         this.direction = 'right';
@@ -148,12 +152,16 @@ class SnakeRL {
     }
 
     resetGame() {
+        // Calculate middle position of the grid
+        const middleX = Math.floor(this.cols / 2);
+        const middleY = Math.floor(this.rows / 2);
+        
         this.snake = [
-            {x: 5, y: 5},
-            {x: 4, y: 5},
-            {x: 3, y: 5},
-            {x: 2, y: 5},
-            {x: 1, y: 5}
+            {x: middleX, y: middleY},
+            {x: middleX - 1, y: middleY},
+            {x: middleX - 2, y: middleY},
+            {x: middleX - 3, y: middleY},
+            {x: middleX - 4, y: middleY}
         ];
         this.food = this.generateFood();
         this.direction = 'right';
