@@ -110,13 +110,13 @@ class SnakeRL {
             case 'right': head.x++; break;
         }
         
-        let reward = -1; // Small penalty for each move
+        let reward = -2; // Small penalty for each move
         let gameOver = false;
         // let collisionType = '';
         
         // Check collision
         if (this.isCollision(head.x, head.y)) {
-            reward = -100;
+            reward = -200;
             gameOver = true;
             
             // // Determine collision type for debugging
@@ -132,7 +132,7 @@ class SnakeRL {
             
             // Check if food eaten
             if (head.x === this.food.x && head.y === this.food.y) {
-                reward = 100;
+                reward = 200;
                 this.score += 10;
                 this.food = this.generateFood();
                 // console.log(`Food eaten! Score: ${this.score}, Snake length: ${this.snake.length}`);
@@ -176,10 +176,78 @@ class SnakeRL {
     }
 
     draw() {
-        // Clear canvas
-        this.ctx.fillStyle = 'white';
+        // Clear canvas with theme-aware background
+        const body = document.body;
+        const isDark = body.getAttribute('data-theme') === 'dark';
+        this.ctx.fillStyle = isDark ? '#1a1a1a' : 'white';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
+        // Draw game elements
+        this.drawGameElements();
+    }
+
+    startGame() {
+        this.gameLoop = setInterval(() => {
+            this.move();
+            this.draw();
+        }, 100);
+        
+        // Listen for theme changes and immediately update canvas background
+        this.setupThemeListener();
+    }
+    
+    setupThemeListener() {
+        // Wait for DOM to be fully loaded, then set up listeners
+        const setupListeners = () => {
+            // Listen directly to the theme toggle button click
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    // Use requestAnimationFrame to ensure DOM has updated
+                    requestAnimationFrame(() => {
+                        this.updateCanvasBackground();
+                    });
+                });
+            }
+        };
+        
+        // Set up listeners immediately if DOM is ready, otherwise wait
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupListeners);
+        } else {
+            setupListeners();
+        }
+        
+        // Also use MutationObserver as backup
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                    // Theme changed, immediately update canvas background
+                    requestAnimationFrame(() => {
+                        this.updateCanvasBackground();
+                    });
+                }
+            });
+        });
+        
+        // Start observing the body element for data-theme attribute changes
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
+    }
+    
+    updateCanvasBackground() {
+        const body = document.body;
+        const isDark = body.getAttribute('data-theme') === 'dark';
+        this.ctx.fillStyle = isDark ? '#1a1a1a' : 'white';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // Redraw the game elements on the new background
+        this.drawGameElements();
+    }
+    
+    drawGameElements() {
         // Draw snake
         this.snake.forEach((segment, index) => {
             if (index === 0) {
@@ -205,13 +273,6 @@ class SnakeRL {
             this.gridSize - 4,
             this.gridSize - 4
         );
-    }
-
-    startGame() {
-        this.gameLoop = setInterval(() => {
-            this.move();
-            this.draw();
-        }, 100);
     }
 }
 

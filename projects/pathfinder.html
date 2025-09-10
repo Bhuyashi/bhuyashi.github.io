@@ -118,6 +118,10 @@
 </section>
 
 <script>
+    // Theme initialization - inherit from main page
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    document.body.setAttribute('data-theme', currentTheme);
+
     // Intersection Observer setup
     const observerOptions = {
         root: null,

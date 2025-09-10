@@ -1,13 +1,51 @@
+:root {
+    /* Light theme colors */
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --text-secondary: #555555;
+    --text-muted: #666666;
+    --nav-bg: #ffffff;
+    --nav-border: lightgrey;
+    --nav-text: grey;
+    --nav-hover: #f2f2f2;
+    --link-color: #00b3b3;
+    --project-bg: #f8f9fa;
+    --canvas-bg: #ffffff;
+    --stat-label: #666666;
+    --stat-value: #333333;
+}
+
+[data-theme="dark"] {
+    /* Dark theme colors */
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --text-muted: #888888;
+    --nav-bg: #1a1a1a;
+    --nav-border: #333333;
+    --nav-text: #b0b0b0;
+    --nav-hover: #2a2a2a;
+    --link-color: #4dd0e1;
+    --project-bg: #222222;
+    --canvas-bg: #1a1a1a;
+    --stat-label: #888888;
+    --stat-value: #e0e0e0;
+}
+
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 70px;
 }
+
 body {
     font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
     /* font-family: 'Lora', Georgia, 'Times New Roman', serif; */
     margin: 0;
     padding: 0;
     font-size: 16px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @keyframes fadeUp {
@@ -48,27 +86,32 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: white;
-    border-bottom: 1px solid lightgrey;
+    background-color: var(--nav-bg);
+    border-bottom: 1px solid var(--nav-border);
     padding: 25px 0 5px 0;
     z-index: 1000;
     height: 45px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .nav-container {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     position: relative;
+    height: 100%;
 }
 
 nav .title {
     font-size: 19px;
     font-weight: bold;
-    color: grey;
-    margin-bottom: 5px;
+    color: var(--nav-text);
     margin-left: 20px;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 nav .links {
@@ -82,17 +125,37 @@ nav .links {
 }
 
 nav .links a {
-    color: grey;
+    color: var(--nav-text);
     text-decoration: none;
     padding: 8px 12px;
     display: inline-block;
     font-size: 17px;
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
 }
 
 nav .links a:hover {
-    background-color: #f2f2f2;
+    background-color: var(--nav-hover);
     border-radius: 3px;
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+    transform: scale(1.1);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--nav-text);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 3px;
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background-color: var(--nav-hover);
     transform: scale(1.1);
 }
 
@@ -118,9 +181,10 @@ section#projects {
 #projects h2 {
     scroll-margin-top: 70px; /* Account for navbar height */
     margin-top: 0;
-    color: #555;
+    color: var(--text-secondary);
     font-size: 27px;
     margin-bottom: 30px;
+    transition: color 0.3s ease;
 }
 
 #about .info h2 {
@@ -140,14 +204,16 @@ section#projects {
     margin-top: 15px;
     margin-bottom: 5px;
     font-size: 22px;
-    color: #333;
+    color: var(--text-color);
     font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 #about .profile-subtitle {
-    color: #666;
+    color: var(--text-muted);
     font-size: 15px;
     margin-bottom: 10px;
+    transition: color 0.3s ease;
 }
 
 #about img {
@@ -159,7 +225,8 @@ section#projects {
 
 #about .info {
     max-width: 80%;
-    color: #555;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
 }
 
 #about .links {
@@ -175,8 +242,9 @@ section#projects {
 }
 
 #about a {
-    color: #00b3b3;
+    color: var(--link-color);
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 #about a:hover {
@@ -196,6 +264,16 @@ section#projects {
     gap: 15px;
     width: 100%;
     position: relative;
+    background-color: var(--project-bg);
+    border-radius: 8px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#projects .project:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 #projects .project img {
@@ -217,32 +295,36 @@ section#projects {
     display: flex;
     justify-content: center;
     align-items: center; /* Ensures the image is centered inside this container */
-    background-color: #f5f5f5; /* Optional: A neutral background color for empty spaces */
+    background-color: transparent; /* Remove background since project box has its own */
     overflow: hidden; /* Ensures no part of the image overflows the container */
+    transition: background-color 0.3s ease;
 }
 
 #projects .project .description h3 {
     margin-top: 0;
     margin-bottom: 10px;
     font-size: 23px;
-    color: #555;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
 }
 
 #projects .project .description h3 a {
-    color: #555;
+    color: var(--text-secondary);
     text-decoration: none;
     font-size: 23px;
+    transition: color 0.3s ease;
 }
 
 #projects .project .description h3 a:hover {
-    color: #00b3b3;
-    text-decoration: underline;
+    color: var(--link-color);
+    text-decoration: none;
 }
 
 #projects .project .description p {
     margin: 10px 0;
-    color: #555;
+    color: var(--text-secondary);
     line-height: 1.5;
+    transition: color 0.3s ease;
 }
 
 .icon {
@@ -302,10 +384,11 @@ nav .links {
 #rl-animation {
     padding: 20px 0;
     text-align: center;
-    background: white;
+    background: var(--bg-color);
     margin: 0;
     width: 100%;
     max-width: none;
+    transition: background-color 0.3s ease;
 }
 
 .snake-game-container {
@@ -313,13 +396,16 @@ nav .links {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    max-width: 1400px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
 #snakeCanvas {
-    background: white;
+    background: var(--canvas-bg);
+    transition: background-color 0.3s ease;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 8px;
 }
 
 .game-stats {
@@ -337,18 +423,20 @@ nav .links {
 }
 
 .stat-label {
-    color: #666;
+    color: var(--stat-label);
     font-size: 12px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    transition: color 0.3s ease;
 }
 
 .stat-value {
-    color: #333;
+    color: var(--stat-value);
     font-size: 18px;
     font-weight: 600;
     font-family: 'Courier New', monospace;
+    transition: color 0.3s ease;
 }
 
 /* Mobile responsiveness for RL animation */

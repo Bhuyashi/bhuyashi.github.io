@@ -20,7 +20,12 @@
 
 <nav>
     <div class="nav-container">
-        <div class="title">Homepage</div>
+        <div class="title">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+            Homepage
+        </div>
         <div class="links">
             <a href="#about">About Me</a>
             <a href="resume/Embedded_Resume.pdf" target="_blank">CV</a>
@@ -58,7 +63,7 @@
 <section id="rl-animation" class="fade-up">
     <div class="animation-container">
         <div class="snake-game-container">
-            <canvas id="snakeCanvas" width="1200" height="195"></canvas>
+            <canvas id="snakeCanvas" width="900" height="195"></canvas>
             <div class="game-stats">
                 <div class="stat-item">
                     <span class="stat-label">Score</span>
@@ -151,6 +156,39 @@
 </section>
 
 <script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const body = document.body;
+
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    body.setAttribute('data-theme', currentTheme);
+    
+    // Update icon based on current theme
+    if (currentTheme === 'dark') {
+        themeIcon.className = 'fas fa-sun';
+    } else {
+        themeIcon.className = 'fas fa-moon';
+    }
+
+    // Theme toggle event listener
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        // Update theme
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Update icon
+        if (newTheme === 'dark') {
+            themeIcon.className = 'fas fa-sun';
+        } else {
+            themeIcon.className = 'fas fa-moon';
+        }
+    });
+
     // Intersection Observer setup
     const observerOptions = {
         root: null,

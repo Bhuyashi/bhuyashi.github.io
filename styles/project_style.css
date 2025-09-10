@@ -1,15 +1,44 @@
+:root {
+    /* Light theme colors */
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --text-secondary: #555555;
+    --text-muted: #888888;
+    --nav-bg: #ffffff;
+    --nav-border: lightgrey;
+    --nav-text: grey;
+    --nav-hover: #f2f2f2;
+    --link-color: #00b3b3;
+}
+
+[data-theme="dark"] {
+    /* Dark theme colors */
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --text-muted: #888888;
+    --nav-bg: #1a1a1a;
+    --nav-border: #333333;
+    --nav-text: #b0b0b0;
+    --nav-hover: #2a2a2a;
+    --link-color: #4dd0e1;
+}
+
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 70px;
 }
+
 body {
     font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
     font-size: 19px;
     line-height: 1.7;
     letter-spacing: 0.005em;
-    color: black;
+    color: var(--text-color);
+    background-color: var(--bg-color);
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .main-content {
@@ -83,39 +112,42 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: white;
-    border-bottom: 1px solid lightgrey;
+    background-color: var(--nav-bg);
+    border-bottom: 1px solid var(--nav-border);
     padding: 25px 0 5px 0;
     z-index: 1000;
     height: 45px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .nav-container {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     position: relative;
+    height: 100%;
 }
 
 nav .title {
     font-size: 19px;
     font-weight: bold;
-    color: grey;
-    margin-bottom: 5px;
+    color: var(--nav-text);
     margin-left: 20px;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 nav .title:hover {
-  color: black;
+  color: var(--text-color);
   text-decoration: none; /* 👈 ensures it stays underline-free on hover */
 }
 
 section {
     margin: 0 auto;
     max-width: 820px;
-    color: #555;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
 }
 
 section#project-title {
@@ -136,11 +168,11 @@ li:not(:last-child) {
 }
 
 section#github a {
-    color: #555;
+    color: var(--text-secondary);
     text-decoration: none;
     padding-bottom: 50px;
     display: inline-block;   
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 section#github a:hover {
