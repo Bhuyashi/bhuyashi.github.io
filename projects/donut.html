@@ -17,23 +17,32 @@
 
 <nav>
     <div class="nav-container">
-        <a href="../index.html" class="title">Homepage</a>
+        <div class="title">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+            <a href="../index.html" class="title">Homepage</a>
+        </div>
     </div>
 </nav>
 
     <section id="project-title" class="fade-up">
         <div>
             <h1>Creating a Realistic Donut in Blender</h1>
-            <p style="font-size: 0.7em; color: #888; margin-top: 0; margin-bottom: 1em;">March 2025</p>
-            <!-- <p style="font-size: 1.2em; color: #666; margin-top: 0;">A deep dive into 3D modeling, texturing, and the art of making digital food look delicious</p> -->
-            <img src="../images/Donuts.png" alt="Blender Donuts" style="width: 100%; max-width: 800px; height: auto; margin-top: 1em;">
+            <div class="project-meta">
+                <span>March 2025</span>
+                <span>|</span>
+                <span class="tag" data-tag="3d-modeling">3D Modeling</span>
+                <span class="tag" data-tag="blender">Blender</span>
+            </div>
+            <img src="../images/projects/Donuts.png" alt="Blender Donuts" style="width: 100%; max-width: 800px; height: auto; margin-top: 1em;">
         </div>
     </section>
 
 <div class="main-content">
     <section id="project-content" class="fade-up">
         <div>
-            <h2>The Beginning: Why a Donut?</h2>
+            <h2>Why a Donut?</h2>
             <p>I started this project since I needed to create custom 3D assets for my Virtual Reality escape room game. I started with Blender since it has easy integration with Unity, is lightweight, and most importantly coz it's free.</p>
             <p>But Blender can be overwhelming, with the sheer number of tools and options available. Enter the classic Blender donut tutorial.</p>
 
@@ -89,8 +98,26 @@
 
 <script>
     // Theme initialization - inherit from main page
-    const currentTheme = localStorage.getItem('theme') || 'light';
+    const currentTheme = localStorage.getItem('theme') || 'dark';
     document.body.setAttribute('data-theme', currentTheme);
+
+    // Update icon based on current theme
+    const themeIcon = document.getElementById('theme-icon');
+    if (currentTheme === 'dark') {
+        themeIcon.className = 'fas fa-sun';
+    } else {
+        themeIcon.className = 'fas fa-moon';
+    }
+
+    // Theme toggle event listener
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+        const current = document.body.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.body.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        themeIcon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    });
 
     // Intersection Observer setup
     const observerOptions = {
@@ -114,6 +141,16 @@
     // Start observing each element
     fadeElements.forEach(element => {
         observer.observe(element);
+    });
+
+    // Tag filtering functionality (for future use)
+    const tags = document.querySelectorAll('.tag');
+    tags.forEach(tag => {
+        tag.addEventListener('click', function() {
+            const tagName = this.getAttribute('data-tag');
+            console.log(`Tag clicked: ${tagName}`);
+            // Future: Implement filtering logic here
+        });
     });
 </script>
 

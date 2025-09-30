@@ -271,6 +271,16 @@ section#projects {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+#projects .project-link {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 15px;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
 #projects .project:hover {
     transform: scale(1.02);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
@@ -308,16 +318,8 @@ section#projects {
     transition: color 0.3s ease;
 }
 
-#projects .project .description h3 a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 23px;
-    transition: color 0.3s ease;
-}
-
-#projects .project .description h3 a:hover {
+#projects .project:hover .description h3 {
     color: var(--link-color);
-    text-decoration: none;
 }
 
 #projects .project .description p {

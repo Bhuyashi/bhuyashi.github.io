@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating a Realistic Donut in Blender</title>
+    <link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Bhuyashi" />
+    <link rel="manifest" href="../favicon/site.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/project_style.css" />
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <div class="title">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+            <a href="../index.html" class="title">Homepage</a>
+        </div>
+    </div>
+</nav>
+
+    <section id="project-title" class="fade-up">
+        <div>
+            <h1>Text Classifier: Deep Averaging Network</h1>
+            <div class="project-meta">
+                <span>September 2025</span>
+                <span>|</span>
+                <span class="tag" data-tag="nlp">NLP</span>
+                <span class="tag" data-tag="classification">Classification</span>
+            </div>
+            
+            <img src="../images/projects/DAN.png" alt="Deep Averaging Network Architecture" style="width: 100%; max-width: 800px; height: auto; margin-top: 1em;">
+        </div>
+    </section>
+
+<div class="main-content">
+    <section id="project-content" class="fade-up">
+        <div>
+            <h2>Overview</h2>
+            <p>This project implements a Deep Averaging Network (DAN) for text classification, a simple yet effective neural architecture that averages word embeddings to create document representations. The model demonstrates how powerful results can be achieved with relatively simple architectures when combined with proper preprocessing and training techniques.</p>
+
+            <h2>Architecture</h2>
+            <p>The Deep Averaging Network consists of several key components: word embeddings, averaging layer, and multiple fully connected layers. The model first converts input text into word embeddings, then averages these embeddings to create a fixed-size document representation, which is then passed through a series of dense layers for classification.</p>
+            
+            <p>The key insight behind DAN is that averaging word embeddings can capture semantic meaning effectively, especially when combined with dropout and other regularization techniques to prevent overfitting.</p>
+
+            <h2>Implementation Details</h2>
+            <p>The model was implemented using PyTorch, with careful attention to data preprocessing, embedding initialization, and training procedures. Key implementation choices included using pre-trained word embeddings, implementing proper batching for variable-length sequences, and applying dropout for regularization.</p>
+            
+            <p>Training involved experimenting with different learning rates, batch sizes, and architectural choices to optimize performance on the classification task.</p>
+
+            <h2>Results and Analysis</h2>
+            <p>The model achieved competitive performance on text classification benchmarks, demonstrating that simple averaging can be surprisingly effective when combined with modern deep learning techniques. The results showed that the DAN architecture is particularly well-suited for tasks where semantic understanding is more important than sequential patterns.</p>
+            
+            <p>Analysis of the learned embeddings revealed that the model successfully captured semantic relationships between words, with similar concepts clustering together in the embedding space.</p>
+
+            <h2>Key Learnings</h2>
+            <p>This project reinforced the importance of proper data preprocessing and regularization in neural networks. The simple averaging approach proved that sometimes the most straightforward solutions can be the most effective, especially when combined with modern training techniques.</p>
+            
+            <p>The project also highlighted the trade-offs between model complexity and performance, showing that simpler architectures can often achieve comparable results with better interpretability and faster training times.</p>
+
+            <h2>Future Work</h2>
+            <p>Potential extensions include incorporating attention mechanisms, experimenting with different embedding strategies, and applying the model to more diverse text classification tasks. The foundation built here provides a solid starting point for exploring more advanced NLP architectures.</p>
+        </div>
+    </section>
+</div>
+
+<section id="github" class="fade-up">
+    <div>
+        <p><a href="https://github.com/Bhuyashi/text-classifier-dan" target="_blank"><b>View the project on GitHub →</b></a></p>
+    </div>
+</section>
+
+<script>
+    // Theme initialization - inherit from main page
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    document.body.setAttribute('data-theme', currentTheme);
+
+    // Update icon based on current theme
+    const themeIcon = document.getElementById('theme-icon');
+    if (currentTheme === 'dark') {
+        themeIcon.className = 'fas fa-sun';
+    } else {
+        themeIcon.className = 'fas fa-moon';
+    }
+
+    // Theme toggle event listener
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+        const current = document.body.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.body.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        themeIcon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    });
+
+    // Intersection Observer setup
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Stop observing once animation is triggered
+            }
+        });
+    }, observerOptions);
+
+    // Get all elements with fade-up class
+    const fadeElements = document.querySelectorAll('.fade-up');
+
+    // Start observing each element
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+
+    // Tag filtering functionality (for future use)
+    const tags = document.querySelectorAll('.tag');
+    tags.forEach(tag => {
+        tag.addEventListener('click', function() {
+            const tagName = this.getAttribute('data-tag');
+            console.log(`Tag clicked: ${tagName}`);
+            // Future: Implement filtering logic here
+        });
+    });
+</script>
+
+</body>
+</html>

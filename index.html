@@ -36,7 +36,7 @@
 
 <section id="about">
     <div class="fade-up profile-section">
-        <img src="images/profile_pic_2.jpeg" alt="Profile Picture">
+        <img src="images/profile_pics/profile_pic_2.jpeg" alt="Profile Picture">
         <div class="profile-name">Bhuyashi Deka</div>
         <div class="profile-subtitle">Computer Science Graduate Student</div>
         <div class="links fade-up delay-1" style="display: flex; justify-content: center; gap: 20px;">
@@ -85,73 +85,104 @@
 <section id="projects">
     <h2 id="projects-heading" class="fade-up">Projects</h2>
     <div class="project fade-up delay-1">
-        <div class="image-container">
-            <img src="images/domain_adaptation.png" alt="Domain Adaptation Image">
-        </div>
-        <div class="description">
-            <h3><a href="reports/Domain_adaptation_report.pdf" target="_blank">Unsupervied Domain Adaptation for Semantic Segmentation</a></h3>
-            <p>A test-time domain adaptation technique for semantic image segmentation that improves model performance on out-of-distribution data (like foggy cityscape images) by dynamically adapting batch normalization layers without additional training.</p>
-        </div>
+        <a href="reports/Domain_adaptation_report.pdf" target="_blank" class="project-link">
+            <div class="image-container">
+                <img src="images/projects/domain_adaptation.png" alt="Domain Adaptation Image">
+            </div>
+            <div class="description">
+                <h3>Unsupervied Domain Adaptation for Semantic Segmentation</h3>
+                <p>A test-time domain adaptation technique for semantic image segmentation that improves model performance on out-of-distribution data (like foggy cityscape images) by dynamically adapting batch normalization layers without additional training.</p>
+            </div>
+        </a>
     </div>
     <div class="project fade-up delay-1">
-        <div class="image-container">
-            <img src="images/fcos.png" alt="FCOS Image">
-        </div>
-        <div class="description">
-            <h3><a href="reports/FCOS_report.pdf" target="_blank">FCOS: Fully Convolutional One-Stage Object Detection Model</a></h3>
-            <p>Developed FCOS architecture that eliminates anchor boxes and provides efficient, accurate object detection. It explores object detection across multiple feature pyramid levels using ResNet backbones (ResNet18 and ResNet34), achieving a mean Average Precision (mAP) of up to 0.61 on test data.</p>
-        </div>
+        <a href="reports/FCOS_report.pdf" target="_blank" class="project-link">
+            <div class="image-container">
+                <img src="images/projects/fcos.png" alt="FCOS Image">
+            </div>
+            <div class="description">
+                <h3>FCOS: Fully Convolutional One-Stage Object Detection Model</h3>
+                <p>Developed FCOS architecture that eliminates anchor boxes and provides efficient, accurate object detection. It explores object detection across multiple feature pyramid levels using ResNet backbones (ResNet18 and ResNet34), achieving a mean Average Precision (mAP) of up to 0.61 on test data.</p>
+            </div>
+        </a>
     </div>
     <div class="project fade-up delay-1">
-        <div class="image-container">
-            <img src="images/diffusion.png" alt="Diffusion Image">
-        </div>
-        <div class="description">
-            <h3><a href="reports/Diffusion_report.pdf" target="_blank">Diffusion Model for Image Synthesis</a></h3>
-            <p>Developed an advanced deep learning model implementing UNet architecture with diffusion techniques to generate synthetic images across MNIST and AFHQ datasets. Explored innovative techniques like sinusoidal time embeddings, cross-attention mechanisms, and latent diffusion models to reconstruct images through iterative denoising processes.</p>
-        </div>
+        <a href="reports/Diffusion_report.pdf" target="_blank" class="project-link">
+            <div class="image-container">
+                <img src="images/projects/diffusion.png" alt="Diffusion Image">
+            </div>
+            <div class="description">
+                <h3>Diffusion Model for Image Synthesis</h3>
+                <p>Developed an advanced deep learning model implementing UNet architecture with diffusion techniques to generate synthetic images across MNIST and AFHQ datasets. Explored innovative techniques like sinusoidal time embeddings, cross-attention mechanisms, and latent diffusion models to reconstruct images through iterative denoising processes.</p>
+            </div>
+        </a>
+    </div>
+    <!-- <div class="project fade-up delay-1">
+        <a href="projects/text_classifier.html" target="_blank" class="project-link">
+            <div class="image-container">
+                <img src="images/projects/DAN.png" alt="Text Classifier Image">
+            </div>
+            <div class="description">
+                <h3>Text Classifier: Deep Averaging Network</h3>
+                <p>Developed an advanced deep learning model implementing UNet architecture with diffusion techniques to generate synthetic images across MNIST and AFHQ datasets. Explored innovative techniques like sinusoidal time embeddings, cross-attention mechanisms, and latent diffusion models to reconstruct images through iterative denoising processes.</p>
+            </div>
+        </a>
+    </div> -->
+    <div class="project fade-up delay-2">
+        <a href="projects/donut.html" target="_blank" class="project-link">
+            <div class="image-container">
+                <img src="images/projects/Donuts.png" alt="Donut Image">
+            </div>
+            <div class="description">
+                <h3>Creating a Realistic Donut in Blender</h3>
+                <p>In this project, I created a realistic 3D-rendered donut in Blender, focusing on procedural modeling, texturing, and lighting. It showcases my work on detailed shading, particle-based sprinkles, and high-quality rendering using Cycles.</p>
+            </div>
+        </a>
     </div>
     <div class="project fade-up delay-2">
-        <div class="image-container">
-            <img src="images/Donuts.png" alt="Donut Image">
-        </div>
-        <div class="description">
-            <h3><a href="projects/donut.html" target="_blank">Creating a Realistic Donut in Blender</a></h3>
-            <p>In this project, I created a realistic 3D-rendered donut in Blender, focusing on procedural modeling, texturing, and lighting. It showcases my work on detailed shading, particle-based sprinkles, and high-quality rendering using Cycles.</p>
-        </div>
+        <a href="https://github.com/Bhuyashi/global_clusters" target="_blank" class="project-link">
+            <div class="image-container">
+                <img src="images/projects/global_clusters.png" alt="Global Clustering Image">
+            </div>
+            <div class="description">
+                <h3>Global Clusters: Hierarchical Analysis of Socioeconomic Indicators</h3>
+                <p>The project uses Hierarchical Agglomerative Clustering to analyze global socioeconomic data, grouping countries based on metrics like GDP, literacy rates, and life expectancy. The results were visualized through dendrograms and scatter plots, offering insights into the clustering patterns.</p>
+            </div>
+        </a>
     </div>
     <div class="project fade-up delay-2">
-        <div class="image-container">
-            <img src="images/global_clusters.png" alt="Global Clustering Image">
-        </div>
-        <div class="description">
-            <h3><a href="https://github.com/Bhuyashi/global_clusters" target="_blank">Global Clusters: Hierarchical Analysis of Socioeconomic Indicators</a></h3>
-            <p>The project uses Hierarchical Agglomerative Clustering to analyze global socioeconomic data, grouping countries based on metrics like GDP, literacy rates, and life expectancy. The results were visualized through dendrograms and scatter plots, offering insights into the clustering patterns.</p>
-        </div>
+        <a href="projects/sample_project.html" class="project-link">
+            <div class="image-container">
+                <img src="images/projects/teeko.png" alt="Teeko Image">
+            </div>
+            <div class="description">
+                <!-- <h3><a href="https://github.com/Bhuyashi/ai_teeko" target="_blank">AI Teeko Game Player</a></h3> -->
+                <h3>AI Teeko Game Player</h3>
+                <p>Developed an intelligent AI game player for Teeko, a strategy game played on a 5x5 board. The project involved implementing the minimax algorithm with depth-limited search, heuristic evaluation, and custom scoring functions to simulate strategic gameplay.</p>
+            </div>
+        </a>
     </div>
     <div class="project fade-up delay-2">
-        <img src="images/teeko.png" alt="Teeko Image">
-        <div class="description">
-            <!-- <h3><a href="https://github.com/Bhuyashi/ai_teeko" target="_blank">AI Teeko Game Player</a></h3> -->
-            <h3><a href="projects/sample_project.html">AI Teeko Game Player</a></h3>
-            <p>Developed an intelligent AI game player for Teeko, a strategy game played on a 5x5 board. The project involved implementing the minimax algorithm with depth-limited search, heuristic evaluation, and custom scoring functions to simulate strategic gameplay.</p>
-        </div>
+        <a href="https://github.com/Bhuyashi/face_pca" target="_blank" class="project-link">
+            <div class="image-container">
+                <img src="images/projects/face_pca.png" alt="Faces PCA Image">
+            </div>
+            <div class="description">
+                <h3>Face Reconstruction with PCA</h3>
+                <p>Implemented Principal Component Analysis for facial image analysis to reduce dimensionality while retaining critical features. The project explored eigenfaces, variance preservation, and reconstruction to enhance understanding of feature extraction in high-dimensional datasets.</p>
+            </div>
+        </a>
     </div>
     <div class="project fade-up delay-2">
-        <img src="images/face_pca.png" alt="Faces PCA Image">
-        <div class="description">
-            <h3><a href="https://github.com/Bhuyashi/face_pca" target="_blank">Face Reconstruction with PCA</a></h3>
-            <p>Implemented Principal Component Analysis for facial image analysis to reduce dimensionality while retaining critical features. The project explored eigenfaces, variance preservation, and reconstruction to enhance understanding of feature extraction in high-dimensional datasets.</p>
-        </div>
-    </div>
-    <div class="project fade-up delay-2">
-        <div class="image-container">
-            <img src="images/pathfinder.png" alt="Pathfinder Image">
-        </div>
-        <div class="description">
-            <h3><a href="projects/pathfinder.html" target="_blank">Exploring Pathfinding Algorithms</a></h3>
-            <p>The project provides an interactive visualization tool that demonstrates pathfinding algorithms like A*, DFS, BFS and visually compares algorithm efficiency.</p>
-        </div>
+        <a href="projects/pathfinder.html" target="_blank" class="project-link">
+            <div class="image-container">
+                <img src="images/projects/pathfinder.png" alt="Pathfinder Image">
+            </div>
+            <div class="description">
+                <h3>Exploring Pathfinding Algorithms</h3>
+                <p>The project provides an interactive visualization tool that demonstrates pathfinding algorithms like A*, DFS, BFS and visually compares algorithm efficiency.</p>
+            </div>
+        </a>
     </div>
 </section>
 
@@ -161,8 +192,8 @@
     const themeIcon = document.getElementById('theme-icon');
     const body = document.body;
 
-    // Check for saved theme preference or default to light mode
-    const currentTheme = localStorage.getItem('theme') || 'light';
+    // Check for saved theme preference or default to dark mode
+    const currentTheme = localStorage.getItem('theme') || 'dark';
     body.setAttribute('data-theme', currentTheme);
     
     // Update icon based on current theme
