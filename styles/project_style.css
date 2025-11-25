@@ -63,18 +63,21 @@ h1, h2, h3 {
 h1 {
     font-size: 1.8em;
     margin-bottom: 0.3em;
+    font-weight: 700;
 }
 
 h2 {
     font-size: 1.6em;
     margin-top: 1.5em;
     margin-bottom: 0.3em;
+    font-weight: 700;
 }
 
 h3 {
     font-size: 1.1em;
     margin-top: 1.2em;
     margin-bottom: 0.3em;
+    font-weight: 700;
 }
 
 @keyframes fadeUp {
@@ -230,9 +233,17 @@ section#github a:hover {
     font-size: 0.7em;
     font-weight: 500;
     transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
 }
 
 .tag:hover {
     background-color: var(--link-color);
-    cursor: pointer;
+}
+
+.github-link {
+    transition: color 0.3s ease;
+}
+
+.github-link:hover {
+    color: var(--link-color) !important;
 }

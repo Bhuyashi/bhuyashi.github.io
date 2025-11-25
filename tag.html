@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects by Tag</title>
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Bhuyashi" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css" />
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <div class="title">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+            <a href="index.html" style="text-decoration: none; color: inherit;">Homepage</a>
+        </div>
+        <div class="links">
+            <a href="index.html#about">About Me</a>
+            <a href="resume/Embedded_Resume.pdf" target="_blank">CV</a>
+            <a href="index.html#projects-heading">Projects</a>
+        </div>
+    </div>
+</nav>
+
+<section id="projects" style="padding-top: 100px;">
+    <h2 id="tag-title">Projects</h2>
+    <div id="projects-container"></div>
+</section>
+
+<script src="projects-data.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
+
+        // Check for saved theme preference or default to dark mode
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        body.setAttribute('data-theme', currentTheme);
+        
+        // Update icon based on current theme
+        if (currentTheme === 'dark') {
+            themeIcon.className = 'fas fa-sun';
+        } else {
+            themeIcon.className = 'fas fa-moon';
+        }
+
+        // Theme toggle event listener
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            // Update theme
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon
+            if (newTheme === 'dark') {
+                themeIcon.className = 'fas fa-sun';
+            } else {
+                themeIcon.className = 'fas fa-moon';
+            }
+        });
+
+        // Get tag from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const tagParam = urlParams.get('tag');
+
+        if (!tagParam) {
+            // No tag specified, redirect to index
+            window.location.href = 'index.html';
+        } else {
+            // Set page title and heading
+            const tagDisplayName = tagDisplayNames[tagParam] || tagParam;
+            document.getElementById('tag-title').textContent = tagDisplayName;
+            document.title = tagDisplayName + ' - Projects';
+
+            // Filter projects by tag
+            const filteredProjects = projectsData.filter(project => 
+                project.tags.includes(tagParam)
+            );
+
+            // Display projects
+            const container = document.getElementById('projects-container');
+            
+            if (filteredProjects.length === 0) {
+                container.innerHTML = '<p class="fade-up">No projects found for this tag.</p>';
+            } else {
+                filteredProjects.forEach((project, index) => {
+                    const projectDiv = document.createElement('div');
+                    projectDiv.className = `project fade-up delay-${Math.min(index % 3 + 1, 2)}`;
+                    
+                    // All project links open in new tab, matching index.html behavior
+                    projectDiv.innerHTML = `
+                        <a href="${project.link}" target="_blank" class="project-link">
+                            <div class="image-container">
+                                <img src="${project.image}" alt="${project.imageAlt}">
+                            </div>
+                            <div class="description">
+                                <h3>${project.title}</h3>
+                                <p>${project.description}</p>
+                            </div>
+                        </a>
+                    `;
+                    
+                    container.appendChild(projectDiv);
+                });
+            }
+
+            // Intersection Observer setup for animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-up elements
+            const fadeElements = document.querySelectorAll('.fade-up');
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -12,6 +12,15 @@
     <link rel="manifest" href="../favicon/site.webmanifest" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../styles/project_style.css" />
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          }
+        };
+      </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
 </head>
 <body>
 
@@ -28,51 +37,59 @@
 
     <section id="project-title" class="fade-up">
         <div>
-            <h1>Creating a Realistic Donut in Blender</h1>
+            <h1>Diffusion Model for Image Synthesis</h1>
             <div class="project-meta">
-                <span>March 2025</span>
+                <span>October 2024</span>
                 <span>|</span>
-                <span class="tag" data-tag="3d-modeling">3D Modeling</span>
-                <span class="tag" data-tag="blender">Blender</span>
+                <span class="tag" data-tag="computer-vision">Computer vision</span>
+                <span class="tag" data-tag="diffusion">Diffusion</span>
             </div>
-            <img src="../images/projects/Donuts.png" alt="Blender Donuts" style="width: 100%; max-width: 800px; height: auto; margin-top: 1em;">
+            <img src="../images/projects/diffusion.png" alt="Blender Donuts" style="width: 100%; max-width: 600px; height: auto; margin-top: 1em;">
         </div>
     </section>
 
 <div class="main-content">
     <section id="project-content" class="fade-up">
         <div>
-            <h2>Why a Donut?</h2>
-            <p>I started this project since I needed to create custom 3D assets for my Virtual Reality escape room game. I started with Blender since it has easy integration with Unity, is lightweight, and most importantly coz it's free.</p>
-            <p>But Blender can be overwhelming, with the sheer number of tools and options available. Enter the classic Blender donut tutorial.</p>
+            <h2>Overview</h2>
+            <p>
+                In this project, I implemented the DDPM diffusion model from scratch using PyTorch.
+                Diffusion models are generative models that create images by iteratively denoising a noisy image.
+                It has a forward process that gradually adds noise to an image, creating intermediate images, 
+                until it becomes complete gaussian noise $\mathcal N(0,1)$.
+                In the reverse process, we try to recover the original image using the intermediate images as an anchor.
+                The image below, taken from the DDPM paper, demonstrates this.
+            </p>
+            <div style="text-align: center; margin: 2em 0;">
+                <img src="../images/projects/DDPM_forward_bkwrd_process.png" alt="DDPM Forward and Reverse Process" style="width: 100%; max-width: 700px; height: auto; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+                <div style="font-size: 0.95em; color: #666; margin-top: 0.5em;">
+                    <em>Figure: The forward (noising) and reverse (denoising) processes</em>
+                </div>
+            </div>
 
-            <h2>The Modeling Process</h2>
-            <p>The foundation was straightforward. Blender's torus primitive provided the perfect starting point. But early on you discover that perfect is not realistic.</p>
+            <h2>Math</h2>
+            <p>Before diving into the code, I wanted to understand the math behind the diffusion process.</p>
             
-            <p>So, I began by adding subdivision surface modifiers to smooth out the geometry, used sculpting tools to create subtle variations in the surface, and added small indentations and surface imperfections. The key was making the dough look soft and slightly irregular, just like a real donut would be.</p>
-
-            <h2>Texturing</h2>
-            <p>This is where the project really came to life. I created procedural textures for both the dough and icing, using Blender's node-based material system. For the dough, I layered multiple noise textures to simulate the porous, slightly rough surface of baked goods. I also added a subtle gradient to the dough to give it a more realistic appearance.</p>
+            <h2>Implementation Details</h2>
+            <p>I used the PyTorch library to implement the DDPM model. I also used the torchvision library to load the datasets.</p>
             
-            <p>The icing was a different challenge entirely. I needed it to look glossy and slightly translucent, with just the right amount of thickness. I used subsurface scattering to give it that realistic depth, making it look like light was actually penetrating the surface rather than just reflecting off it.</p>
-
-            <h2>The Sprinkles Challenge</h2>
+            <h2>Results</h2>
             <p>To add the sprinkles, I used the particle system to distribute them naturally across the icing surface. The trick was getting the right density—too many and it looked artificial, too few and it lacked visual interest. I also varied the colors and sizes slightly to mimic real sprinkles.</p>
 
-            <h2>Lighting</h2>
+            <h2>Conclusion</h2>
             <p>For the final presentation, lighting was key. I added a red and blue light on the sides of the donuts such that they complimented the colors of the donuts and highlighted the sprinkles.</p>
 
-            <h2>Rendering and Post-Processing</h2>
+            <h2>Looking Forward</h2>
             <p>I used Cycles renderer for photorealistic results, though it required longer render times. The payoff was worth it. The subsurface scattering, realistic shadows, and accurate light behavior made the final image look incredibly convincing.</p>
             
             <p>In post-processing, I made subtle adjustments to color balance and contrast, ensuring the donut looked warm and inviting without being oversaturated.</p>
 
-            <h2>What I Learned</h2>
+            <h2>Future Improvements</h2>
             <p>This project taught me that 3D modeling is as much about observation as it is about technical skill. It makes a difference to study how light interacts with the glaze, how the surface imperfections catch the light, and how the colors vary slightly across the surface.</p>
             
             <p>And that the devil is in the details. A slight adjustment to the subsurface scattering settings could make the difference between plastic-looking icing and something that actually appeared edible.</p>
 
-            <h2>The Final Result</h2>
+            <h2>References</h2>
             <p>Below is a video showcasing the final donut setup, demonstrating the various angles and lighting conditions:</p>
             
             <video controls width="100%" style="margin: 2em 0;">

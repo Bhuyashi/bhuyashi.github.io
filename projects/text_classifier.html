@@ -125,15 +125,27 @@
         observer.observe(element);
     });
 
-    // Tag filtering functionality (for future use)
-    const tags = document.querySelectorAll('.tag');
-    tags.forEach(tag => {
-        tag.addEventListener('click', function() {
-            const tagName = this.getAttribute('data-tag');
-            console.log(`Tag clicked: ${tagName}`);
-            // Future: Implement filtering logic here
+    // Tag click navigation functionality
+    function initTagHandlers() {
+        const tags = document.querySelectorAll('.tag');
+        tags.forEach(tag => {
+            tag.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const tagName = this.getAttribute('data-tag');
+                if (tagName) {
+                    window.location.href = `../tag.html?tag=${encodeURIComponent(tagName)}`;
+                }
+            });
         });
-    });
+    }
+    
+    // Initialize tag handlers when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTagHandlers);
+    } else {
+        initTagHandlers();
+    }
 </script>
 
 </body>
