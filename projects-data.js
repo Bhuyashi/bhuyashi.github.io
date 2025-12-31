@@ -1,6 +1,15 @@
 // Projects data with tags mapping
 const projectsData = [
     {
+        title: "Variational Autoencoder for MNIST and Fashion-MNIST",
+        description: "Developed a Variational Autoencoder model for MNIST and Fashion-MNIST datasets. The model explores the latent space of the data and reconstructs the images from the latent space.",
+        image: "images/projects/interpolation_mnist.gif",
+        imageAlt: "Variational Autoencoder Image",
+        link: "projects/vae.html",
+        isExternal: false,
+        tags: ["computer-vision", "latent-space"]
+    },
+    {
         title: "Unsupervied Domain Adaptation for Semantic Segmentation",
         description: "A test-time domain adaptation technique for semantic image segmentation that improves model performance on out-of-distribution data (like foggy cityscape images) by dynamically adapting batch normalization layers without additional training.",
         image: "images/projects/domain_adaptation.png",
@@ -72,6 +81,8 @@ const projectsData = [
         isExternal: false,
         tags: ["dsa", "pathfinding", "blender"]
     }
+    
+
 ];
 
 // Tag display names mapping
@@ -92,6 +103,7 @@ const tagDisplayNames = {
     "nlp": "NLP",
     "classification": "Classification",
     "yolo": "YOLO",
-    "multi-modal": "Multi-Modal"
+    "multi-modal": "Multi-Modal",
+    "latent-space": "Latent Space"
 };
 

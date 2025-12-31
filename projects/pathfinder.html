@@ -12,6 +12,9 @@
     <link rel="manifest" href="../favicon/site.webmanifest" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../styles/project_style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </head>
 <body>
 
@@ -32,11 +35,13 @@
             <div class="project-meta">
                 <span>December 2023</span>
                 <span>|</span>
+                <a href="https://github.com/Bhuyashi/pathfinder" target="_blank" class="github-link" style="color: inherit; text-decoration: none; display: inline-flex; align-items: center;">
+                    <i class="fab fa-github" style="font-size: 1em; margin: 0 0.2em;"></i>
+                </a>
                 <span class="tag" data-tag="dsa">DSA</span>
                 <span class="tag" data-tag="pathfinding">Pathfinding</span>
-                <span class="tag" data-tag="blender">Blender</span>
             </div>
-            <img src="../images/projects/pathfinder.png" alt="Pathfinding Algorithms" style="width: 100%; max-width: 800px; height: auto; margin-top: 1em;">
+            <img src="../images/projects/pathfinder.png" alt="Pathfinding Algorithms" style="width: 100%; max-width: 600px; height: auto; margin-top: 1em;">
         </div>
     </section>
 
@@ -44,89 +49,223 @@
     <section id="project-content" class="fade-up">
         <div>
             <h2>Why Pathfinding?</h2>
-            <p>The project was born from a curiosity to see how different search algorithms would solve the same maze. Each has its own philosophy and trade-offs, and seeing them in action reveals the beauty of algorithmic thinking. </p>
+            <p> The project was born from a curiosity to see how different search algorithms would solve the same maze.
+                And why a maze? Well, it is intuitive for us to solve a maze starting from the end. I wanted to see how the algorithms
+                would solve it beginning from the start of the maze as well as to see how they would fare against each other. 
+            </p>
             
-            <p>To compare and visualize different pathfinding approaches, I used: Depth-First Search (DFS), Breadth-First Search (BFS), and A* algorithm. </p>
+            <p> To put to the test, I used: Depth-First Search (DFS), Breadth-First Search 
+                (BFS), and A* algorithm, the most standard search algorithms. 
+            </p>
 
-            <h2>Creating the Playground</h2>
-            <p>Before I could test pathfinding algorithms, I needed a maze to navigate. I implemented a maze generation system using depth-first search, ironically, to create the environment for testing others.</p>
+            <h2>Creating the Maze</h2>
+            <p> Before I could test pathfinding algorithms, I needed a maze to navigate. So, I had to start by creating
+                the maze first. I chose to generate maze using a recursive backtracking algorithm, which is essentially 
+                a depth-first search applied to maze construction. Although, it seems like this could bias 
+                the results, but if the maze generation starts randomly, while search starts systematically, this should be 
+                a valid test.
+            </p>
+
+            <p> The core idea is simple: start with a grid where every cell has walls on all four sides. Pick a starting cell, 
+                mark it as visited, and then randomly choose an unvisited neighbor. Break down the wall between them, move 
+                to that neighbor, and repeat. When you hit a dead end (no unvisited neighbors), backtrack to the previous 
+                cell and continue from there.
+            </p>
+            <p> Here's the key part of my implementation:</p>
+            <div class="code-block-container">
+                <pre style="margin: 0; padding: 0; overflow-x: auto; line-height: 1.4; background: transparent;"><code class="language-python" style="font-size: 0.85em; text-align: left; display: block; margin: 0; padding: 0; line-height: 1.4; background: transparent;">def maze_builder(self,ix,iy,count):
+    start_cell = self.cell_at(ix,iy)
+    valid_neighbours = self.nearest_neighbours(start_cell)
+    if valid_neighbours==[]:
+        self.done.append((ix,iy))
+        if len(self.visited)>0:
+            ix,iy = self.visited[-1]
+            self.visited = self.visited[:-1]
+    else:
+        next_direction, next_cell = random.choice(valid_neighbours)
+        start_cell.break_wall(next_cell,next_direction)
+        self.visited.append((ix,iy))
+        ix,iy = next_cell.x,next_cell.y
+        count += 1
+    return start_cell, ix,iy,count</code></pre>
+            </div>
             
-            <p>The maze generation works by starting with a grid of walls and systematically removing walls to create paths. The depth-first approach ensures that every cell is reachable from every other cell, creating a perfect maze with exactly one path between any two points.</p>
+            <p> 
+                The algorithm maintains a stack (implemented as a list) of visited cells. When there are no valid neighbors, 
+                we pop from the stack to backtrack. This guarantees that every cell will eventually be visited, creating a 
+                perfect maze, i.e. one with exactly one path between any two points. The image below shows a 15x15 maze 
+                generated by the algorithm. There is also an accompanying animation of the maze generation process.
+            </p>
 
-            <p>The code not just gives a visual glimpse of how the maze is created, but also stores the final maze as an SVG file. Here's a 15x15 maze generated by the algorithm:</p>
-            <img src="../images/maze_15_15.png" alt="15x15 Maze" style="width: 100%; max-width: 400px; height: auto; margin: 1em 0; border: 1px solid #ddd;">
-
-            <p>Watch how the maze is constructed using depth-first search:</p>
-            <video controls width="400" style="margin: 1em 0; max-width: 100%;">
-                <source src="../videos/maze_15_15.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <div style="display: flex; gap: 2em; margin-top: 3em; margin-bottom: 2em; flex-wrap: wrap; align-items: flex-start; justify-content: center;">
+                <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; align-items: center;">
+                    <img src="../images/projects/maze_15_15.png" alt="15x15 Maze" style="width: 100%; max-width: 400px; height: auto; border: 1px solid #ddd;">
+                    <p style="margin-top: 0.5em; font-size: 0.9em; color: #666; text-align: center;">15x15 generated maze</p>
+                </div>
+                <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; align-items: center;">
+                    <video controls style="width: 100%; max-width: 365px; height: auto;">
+                        <source src="../videos/maze_15_15.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p style="margin-top: 0.5em; font-size: 0.9em; color: #666; text-align: center;">Maze generation animation</p>
+                </div>
+            </div>
 
             <h2>Depth-First Search</h2>
-            <p>DFS is like an explorer who always takes the first available path and keeps going until they hit a dead end. It's systematic but not always efficient. The algorithm explores as far as possible along each branch before backtracking.</p>
-            
-            <p>What makes DFS interesting is its memory efficiency—it only needs to remember the current path. However, it doesn't guarantee finding the shortest path. In the visualizations, you can see how DFS explores deep into the maze, sometimes taking long detours before finding the goal.</p>
+            <p>
+                DFS is the simplest conceptually. It explores as far as possible along each branch before backtracking. 
+                In maze terms, it picks a direction and keeps going until it hits a dead end, then backtracks.
+            </p>
 
-            <p>Interestingly, in this maze, DFS actually finds the endpoint fastest! This is likely because the maze was constructed using DFS, creating a structure that naturally favors depth-first exploration.</p>
+            <div class="code-block-container">
+                <pre style="margin: 0; padding: 0; overflow-x: auto; line-height: 1.4; background: transparent;"><code class="language-python" style="font-size: 0.85em; text-align: left; display: block; margin: 0; padding: 0; line-height: 1.4; background: transparent;">def run(self,maze,ix,iy):
+    cell = maze.cell_at(ix,iy)
+    valid_neighbours = self.nearest_neighbours(cell,maze)
+    if valid_neighbours==[]:
 
-            <video controls width="400" style="margin: 1em 0; max-width: 100%;">
-                <source src="../videos/DFS_20x20.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        self.done.append((ix,iy))
+        if len(self.visited)>0:
+            ix,iy = self.visited.pop(-1)
+    else:
+        next_cell = valid_neighbours[-1]
+        self.visited.append((ix,iy))
+        ix,iy = next_cell.x,next_cell.y
+    return cell,ix,iy</code></pre>
+            </div>
+            <p>
+                DFS uses a LIFO stack , which I implement by popping from the end of the <code>visited</code> 
+                list. The visualization shows DFS taking long, winding paths, often exploring deep into dead ends before 
+                backtracking. It's not optimal for finding shortest paths, but it's memory-efficient and guaranteed to 
+                find a solution if one exists.
+            </p>
+
+            <div style="display: flex; justify-content: center; margin: 1em 0;">
+                <video controls width="400" style="max-width: 100%;">
+                    <source src="../videos/DFS_20x20.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
 
             <h2>Breadth-First Search</h2>
-            <p>BFS takes a completely different approach. Instead of going deep, it explores all neighbors at the current distance before moving to the next level. It's like ripples spreading across a pond—methodical and thorough.</p>
+            <p>
+                BFS explores all neighbors at the current depth before moving to the next level. It's like a ripple 
+                expanding outward from the start point.
+            </p>
+            <div class="code-block-container">
+                <pre style="margin: 0; padding: 0; overflow-x: auto; line-height: 1.4; background: transparent;"><code class="language-python" style="font-size: 0.85em; text-align: left; display: block; margin: 0; padding: 0; line-height: 1.4; background: transparent;">def run(self,maze,ix,iy):
+    if (ix,iy) not in self.visited:
+        self.visited.append((ix,iy))
+    cell = maze.cell_at(ix,iy)
+    valid_neighbours = self.nearest_neighbours(cell,maze)
+    self.queue = self.queue + valid_neighbours
+    for cells in valid_neighbours:
+        self.visited.append((cells.x,cells.y))
+    if valid_neighbours==[]:
+        self.done.append((ix,iy))
+    
+    next_cell = self.queue.pop(0)
+    ix,iy = next_cell.x,next_cell.y
+    return cell,ix,iy</code></pre>
+            </div>
             
-            <p>The beauty of BFS is that when it finds the goal, it has guaranteed the shortest path. It explores the maze in expanding circles, ensuring that the first time it reaches the destination, it's via the optimal route. The trade-off is memory usage. BFS needs to remember all the nodes at the current level.</p>
+            <p>
+                BFS uses a queue, implemented by popping from the front. 
+                Each cell tracks its parent, which allows us to reconstruct the path once we reach the goal. The 
+                visualization shows BFS expanding uniformly in all directions, like a wave. This guarantees the shortest 
+                path in an unweighted graph (which our maze is), but it explores many more cells than necessary.
+            </p>
 
-            <p>Notice how BFS explores almost the entire maze before finding the goal. This systematic approach guarantees the shortest path but requires exploring many more cells than DFS in this particular maze structure.</p>
-
-            <video controls width="400" style="margin: 1em 0; max-width: 100%;">
-                <source src="../videos/BFS_20x20.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <div style="display: flex; justify-content: center; margin: 1em 0;">
+                <video controls width="400" style="max-width: 100%;">
+                    <source src="../videos/BFS_20x20.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
 
             <h2>A* Algorithm</h2>
-            <p>A* combines the best of both worlds with a clever heuristic. Instead of blindly exploring, it uses an estimate of the distance to the goal (Manhattan distance in our case) to guide its search. It's like having a compass that always points toward the destination.</p>
+            <p>
+                While DFS and BFS seem too rigid in their implementation, A* tries to use a heuristic to make a more
+                educated guess. So, instead of blindly exploring, the heuristic provides a compass that 
+                always points toward the destination. I used Manhattan distance for the heuristic because it's the most 
+                intuitive for a maze environment and it's easy. Just <code>abs(x_diff) + abs(y_diff)</code>. No fancy math needed.
+            </p>
             
-            <p>The heuristic function makes A* incredibly efficient. It explores promising paths first, often finding the optimal solution much faster than BFS while using less memory than DFS. The Manhattan distance heuristic works particularly well in grid-based mazes, providing a good estimate of the actual path length.</p>
+            <p>
+                The algorithm uses the formula: 
+                <code>f(n) = g(n) + h(n)</code>, where
+                <ul style="margin: 0.5em 0; padding-left: 1.5em;">
+                    <li style="margin-bottom: 0.3em;"><code>g(n)</code> is the actual cost from the start to node <code>n</code></li>
+                    <li style="margin-bottom: 0.3em;"><code>h(n)</code> is the heuristic estimate from node <code>n</code> to the goal</li>
+                    <li style="margin-bottom: 0;"><code>f(n)</code> is the total estimated cost</li>
+                </ul>
+                I then maintain a priority queue where cells are sorted by their <code>f</code> value. When there's a tie, 
+                I prefer cells with a lower heuristic value since they are closer to the goal.
+            </p>
+            <div class="code-block-container">
+                <pre style="margin: 0; padding: 0; overflow-x: auto; line-height: 1.4; background: transparent;"><code class="language-python" style="font-size: 0.85em; text-align: left; display: block; margin: 0; padding: 0; line-height: 1.4; background: transparent;">def insertCell(self,cell):
+    sum = cell.G + cell.H
+    n = len(self.queue)
+    if n == 0:
+        self.queue.append(cell)
+    elif sum > self.queue[-1].G+self.queue[-1].H:
+        self.queue.append(cell)
+    else:
+        for i in range(n):
+            if sum < self.queue[i].G+self.queue[i].H:
+                self.queue.insert(i,cell)
+                break
+            elif sum == self.queue[i].G+self.queue[i].H:
+                if cell.H < self.queue[i].H:
+                    self.queue.insert(i,cell)
+                else:
+                    self.queue.insert(i+1,cell)
+                break</code></pre>
+            </div>
+            <p>
+                A* is finds the shortest path and explores fewer cells than BFS when the heuristic is admissible (never 
+                overestimates the true cost). Manhattan distance is admissible for grid-based mazes where you can only move 
+                in four directions. The visualization shows A* making a beeline toward the goal, exploring far fewer cells 
+                than BFS while still guaranteeing the optimal path.
+            </p>
 
-            <p>Surprisingly, A* also explores nearly the entire maze in this case. This suggests that the maze structure, created by DFS, doesn't align well with the Manhattan distance heuristic, making A* behave more like BFS.</p>
+            <div style="display: flex; justify-content: center; margin: 1em 0;">
+                <video controls width="400" style="max-width: 100%;">
+                    <source src="../videos/AStar_20x20.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
 
-            <video controls width="400" style="margin: 1em 0; max-width: 100%;">
-                <source src="../videos/AStar_20x20.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <h2>More implementation details</h2>
+            <p>
+                The visualization uses Pygame to render the maze and algorithm progress in real-time. Each algorithm step is 
+                drawn with a small delay (<code>20ms</code>), creating an animation effect. The current cell being explored 
+                is shown in red, visited cells in yellow, and the final path in pink.
+            </p>
+            <p>
+                One challenge was handling the backtracking visualization. For BFS and A*, I track parent pointers and reconstruct 
+                the path once the goal is reached. For DFS, I simply reverse the visited list since DFS naturally explores a path 
+                from start to finish (though not necessarily the optimal one).
+            </p>
 
-            <h2>Comparing the Algorithms</h2>
-            <p>Running all three algorithms on the same 20x20 maze revealed fascinating differences. DFS explored deep paths, sometimes taking long detours. BFS methodically expanded in all directions, guaranteeing the shortest path but exploring many unnecessary cells. A* used its heuristic to navigate more intelligently, often finding the goal with fewer explored cells.</p>
+            <h2>My Learnings from the project</h2>
+            <p>
+                I learned some key concepts. DFS uses a stack, BFS uses a queue, and A* uses a priority queue. The choice 
+                fundamentally changes the exploration pattern. DFS is memory-efficient but not optimal. BFS is optimal but explores 
+                many unnecessary cells. A* is optimal and efficient but requires a good heuristic. The code is straightforward 
+                Python, but the algorithms themselves are elegant solutions to a fundamental problem in computer science.
+            </p>
+            <p>
+                Also, watching the algorithms run makes their differences immediately apparent in a way that code alone 
+                doesn't convey. There's something deeply satisfying about watching a computer methodically solve a problem, 
+                especially when you understand exactly how it's thinking.
+            </p>
+            <p>
+                Alright folks, that's it for this project. See you in the next one!
+            </p>
             
-            <p>The key insight was understanding when to use each algorithm. DFS is great for exploring unknown spaces, BFS is perfect when you need the shortest path, and A* excels when you have a good heuristic and want both efficiency and optimality.</p>
-
-            <h2>Technical Implementation</h2>
-            <p>The project is built in Python with a modular design. Each algorithm is implemented as a separate class, making it easy to add new pathfinding methods. The maze generation and visualization systems are also modular, allowing for easy experimentation with different maze sizes and generation algorithms.</p>
-            
-            <p>The codebase includes:</p>
-            <ul>
-                <li><b>maze.py:</b> Core maze generation and visualization</li>
-                <li><b>createMaze.py:</b> Visual maze construction process</li>
-                <li><b>pathfinder.py:</b> Main orchestrator for running algorithms</li>
-                <li><b>dfs.py, bfs.py, astar.py:</b> Individual algorithm implementations</li>
-            </ul>
-
-            <h2>What I Learned</h2>
-            <p>This project taught me that algorithms aren't just mathematical concepts—they're different ways of thinking about problems. Each pathfinding approach represents a different philosophy: exploration vs. systematic search vs. intelligent guidance.</p>
-            
-            <p>The visual aspect was crucial. Watching the algorithms work in real-time made abstract concepts concrete. I could see exactly how each algorithm made decisions, where they got stuck, and how they eventually found their way.</p>
         </div>
     </section>
 </div>
-
-<section id="github" class="fade-up">
-    <div>
-        <p><a href="https://github.com/Bhuyashi/pathfinder" target="_blank"><b>View the project on GitHub →</b></a></p>
-    </div>
-</section>
 
 <script>
     // Theme initialization - inherit from main page
