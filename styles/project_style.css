@@ -189,8 +189,19 @@ section {
 
 section#project-title {
     padding-top: 80px;
+    padding-left: 20px;
+    padding-right: 20px;
     font-size: 24px;
     font-weight: bold; 
+}
+
+section#project-title > div {
+    padding-left: 0;
+}
+
+section#project-title img:first-of-type {
+    max-width: 400px !important;
+    width: 100% !important;
 }
 
 section#project-content {
@@ -225,6 +236,7 @@ section#github a:hover {
     align-items: center;
     font-size: 0.7em;
     color: #888;
+    width: 100%;
 }
 
 .tag {
@@ -400,6 +412,8 @@ code[class*="language-"] {
     /* Section padding adjustments */
     section#project-title {
         padding-top: 70px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
 
     .main-content {
