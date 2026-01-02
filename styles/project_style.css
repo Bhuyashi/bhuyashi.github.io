@@ -92,9 +92,12 @@ h3 {
 }
 
 .fade-up {
-    opacity: 0;
+    /* opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; */
+    opacity: 1;
+    transform: translateY(0);
+    transition: none;
 }
 
 .fade-up.visible {
@@ -375,4 +378,31 @@ code[class*="language-"] {
 [data-theme="light"] code[class*="language-"] .token.comment {
     color: #6a737d !important;
     background: transparent !important;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    /* Navigation bar mobile fixes */
+    .nav-container {
+        padding: 0 10px !important;
+    }
+
+    nav .title {
+        font-size: 16px !important;
+        gap: 10px !important;
+    }
+
+    .theme-toggle {
+        padding: 6px 8px !important;
+        font-size: 16px !important;
+    }
+
+    /* Section padding adjustments */
+    section#project-title {
+        padding-top: 70px;
+    }
+
+    .main-content {
+        padding: 20px 15px;
+    }
 }
